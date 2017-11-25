@@ -57,6 +57,9 @@ var OrderSchema = new Schema({
         type:String,
         enum:['no_importance', "moderate", "low", "fragile", "ideal"],
         default:'no_importance'
+    },
+    cost:{
+        type:Number
     }
 });
 

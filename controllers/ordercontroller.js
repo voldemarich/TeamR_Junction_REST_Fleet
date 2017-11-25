@@ -6,6 +6,7 @@ var mongoose = require('mongoose'),
     Violation = mongoose.model('Violations');
 
 var authcontroller = require("./authcontroller");
+var costcalc = require('../util/costscalc');
 
 exports.get_all_orders = function (req, res) {
     authcontroller.authorize_username(req, res, function (uname) {
@@ -47,12 +48,14 @@ exports.register_multiple_orders = function (req, res) {
         req.body.forEach(function (p1, p2, p3) {
             order_col = p1;
             order_col.username = uname;
+            order_col.cost = costcalc.calculate(order_col);
 
             var new_order = new Order(order_col);
             new_order.save(function (err, order) {
                 if (err) {
                     success = false;
                 }
+                console.log(order);
             });
 
         });

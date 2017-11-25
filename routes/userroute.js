@@ -9,4 +9,7 @@ module.exports = function (app) {
 
     app.route('/login')
         .post(usercontroller.authorize);
+
+    app.route('/myacc')
+        .get(usercontroller.accinfo);
 };

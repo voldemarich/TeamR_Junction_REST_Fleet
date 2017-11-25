@@ -8,6 +8,14 @@
   Content-type: application/json  
   {"username":"ex", "password":"pass"}
   
+* GET /myacc   
+  Headers:  
+  - Authorization: \<token from /login\>
+  - Content-type: application/json 
+   
+  Returns user info (i.e. token quantity etc.)
+  
+  
 * POST /orders  
   Headers:  
   - Authorization: \<token from /login\>
@@ -48,4 +56,11 @@
   - Content-type: application/json 
    
   Returns violations recorded on order
+  
+* GET /orders/violations   
+  Headers:  
+  - Authorization: \<token from /login\>
+  - Content-type: application/json 
+   
+  Returns all recorded violations
   

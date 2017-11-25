@@ -6,6 +6,8 @@ var mongoose = require('mongoose'),
     User = mongoose.model('Users'),
     Token = mongoose.model('Tokens');
 
+var authcontroller = require("./authcontroller");
+
 exports.register_new_user = function (req, res) {
     var new_user = new User(req.body);
     new_user.save(function (err, user) {
@@ -15,6 +17,15 @@ exports.register_new_user = function (req, res) {
         res.json(user);
     })
 };
+
+exports.accinfo = function (req, res) {
+    authcontroller.authorize_username(req, res, function (uname) {
+        User.findOne({username:uname}, function (err, user) {
+            if (err) res.sendStatus(400);
+            res.json(user);
+        })
+    });
+}
 
 exports.authorize = function (req, res) {
     User.findOne({username:req.body.username}, function (err, user) {

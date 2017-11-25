@@ -9,7 +9,9 @@
     "express": "~4.15.5",
     "mongoose": "~4.13.5",
     "randomstring": "~1.1.5",
-    "bcrypt": "^1.0.3"
+    "bcrypt": "^1.0.3",
+    "tiny-worker": "^2.1.1",
+    "mqtt": "^2.14.0"
   },
   "devDependencies": {
     "nodemon": "^1.12.1"
