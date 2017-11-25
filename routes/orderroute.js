@@ -7,7 +7,10 @@ module.exports = function (app) {
 
     app.route('/orders')
         .get(ordercontroller.get_all_orders)
-        .post(ordercontroller.register_order);
+        .post(ordercontroller.register_multiple_orders);
+
+    app.route('/orders/violations')
+        .get(violationcontroller.get_all_violations);
 
     app.route('/orders/:orderNumber')
         .get(ordercontroller.get_order)

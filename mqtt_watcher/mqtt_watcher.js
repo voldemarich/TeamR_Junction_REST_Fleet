@@ -9,7 +9,7 @@ module.exports = function () {
 
         //** some constants of ranges **//
         const TEMP_RANGE = 5;
-        const TEMP_FINALIZE_QTY = 30;
+        const TEMP_FINALIZE_QTY = 400;
         //shaking
         //******************************//
 
