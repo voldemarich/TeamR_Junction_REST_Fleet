@@ -22,7 +22,10 @@ exports.authorize = function (req, res) {
         if (err) res.send(err);
         user.comparePassword(req.body.password, function (err, isMatch) {
             if (err) res.send(err);
-            if (!isMatch)res.send(403);
+            if (!isMatch){
+                res.send(403);
+                return;
+            }
             Token.findOne({username:req.body.username}, function (err, token) {
                 if (err) res.send(err);
                 if (token !== null){

@@ -6,23 +6,57 @@ var mongoose = require("mongoose");
 var randomstring = require("randomstring");
 var Schema = mongoose.Schema;
 
-var TokenSchema = new Schema({
-    username:{
-        type: String,
-        required: 'No user without the username',
+var OrderSchema = new Schema({
+    order_number:{
+        type: Number,
+        default: randomstring.generate({
+            charset: "numeric",
+            length: 10
+        }),
         index: {unique: true}
     },
-    token:{
+    username:{
         type:String,
-        default: randomstring.generate({
-            charset: "alphanumeric",
-            length: 25
-        })
+        required:"Whom does this belong to?"
     },
-    valid_until: {
+    timestamp: {
         type: Date,
-        default: (function (){d = new Date(Date.now()); d.setHours(d.getHours()+2); return d;})()
+        default: new Date(Date.now())
+    },
+    goods_name:{
+        type: String,
+        required:"The name of the goods transported"
+    },
+    goods_type:{
+        type:String,
+        enum:["liquid", "solid", "gas"],
+        required:"Aggregate state must be specified"
+    },
+    goods_special:{
+        type:String,
+        enum:["explosive", "poisonous", "radioactive", "hermetic_package"]
+    },
+    volume:{
+        type:Number,
+        required:"Put in volume in m3"
+    },
+    weight:{
+        type:Number,
+        required:"Put in weight in kg"
+    },
+    distance:{
+        type:Number,
+        required:"Put in distance in km"
+    },
+    temperature:{
+        type:Number,
+        required:"Put in temperature in *C"
+    },
+    shake_level:{
+        type:String,
+        enum:['no_importance', "moderate", "low", "fragile", "ideal"],
+        default:'no_importance'
     }
 });
 
-module.exports = mongoose.model("Tokens", TokenSchema);
+module.exports = mongoose.model("Orders", OrderSchema);

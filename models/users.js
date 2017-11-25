@@ -17,6 +17,10 @@ var UserSchema = new Schema({
         type:String,
         required: 'Password sha256 required'
     },
+    money:{
+        type:Number,
+        default:100000.0
+    },
     created_date: {
         type: Date,
         default: Date.now
