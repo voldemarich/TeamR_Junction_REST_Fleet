@@ -42,3 +42,10 @@
    
   Deletes the order of given number
   
+* GET /orders/\<order_number\>/violations   
+  Headers:  
+  - Authorization: \<token from /login\>
+  - Content-type: application/json 
+   
+  Returns violations recorded on order
+  

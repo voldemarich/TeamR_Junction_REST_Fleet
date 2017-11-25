@@ -3,6 +3,7 @@
  */
 module.exports = function (app) {
     var ordercontroller = require("../controllers/ordercontroller");
+    var violationcontroller = require("../controllers/violationcontroller");
 
     app.route('/orders')
         .get(ordercontroller.get_all_orders)
@@ -11,4 +12,7 @@ module.exports = function (app) {
     app.route('/orders/:orderNumber')
         .get(ordercontroller.get_order)
         .delete(ordercontroller.delete_order);
+
+    app.route('/orders/:orderNumber/violations')
+        .get(violationcontroller.get_violations)
 };

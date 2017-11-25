@@ -19,6 +19,10 @@ exports.register_new_user = function (req, res) {
 exports.authorize = function (req, res) {
     User.findOne({username:req.body.username}, function (err, user) {
         if (err) res.send(err);
+        if (user === null){
+            res.send(403);
+            return;
+        }
         user.comparePassword(req.body.password, function (err, isMatch) {
             if (err) res.send(err);
             if (!isMatch){

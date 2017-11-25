@@ -10,11 +10,7 @@ var mongoose = require('mongoose'),
 var authcontroller = require("./authcontroller");
 
 exports.get_all_orders = function (req, res) {
-    authcontroller.authorize_username(req.header("Authorization"), function (uname) {
-        if (!uname) {
-            res.sendStatus(403);
-            return;
-        }
+    authcontroller.authorize_username(req, res, function (uname) {
         Order.find({username: uname}, function
             (err, orders) {
             if (err) res.send(err);
@@ -24,11 +20,7 @@ exports.get_all_orders = function (req, res) {
 };
 
 exports.get_order = function (req, res) {
-    authcontroller.authorize_username(req.header("Authorization"), function (uname) {
-        if (!uname) {
-            res.sendStatus(403);
-            return;
-        }
+    authcontroller.authorize_username(req, res, function (uname) {
     Order.findOne({order_number:req.param.orderNumber, username:uname}, function
         (err, order) {
         if (err) res.send(err);
@@ -38,12 +30,7 @@ exports.get_order = function (req, res) {
 };
 
 exports.register_order = function (req, res) {
-    authcontroller.authorize_username(req.header("Authorization"), function (uname) {
-        console.log(uname);
-        if (!uname) {
-            res.sendStatus(403);
-            return;
-        }
+    authcontroller.authorize_username(req, res, function (uname) {
         order_col = req.body;
         order_col.username = uname;
 
@@ -56,11 +43,7 @@ exports.register_order = function (req, res) {
 };
 
 exports.delete_order = function (req, res) {
-    authcontroller.authorize_username(req.header("Authorization"), function (uname) {
-        if (!uname) {
-            res.sendStatus(403);
-            return;
-        }
+    authcontroller.authorize_username(req, res, function (uname) {
         Order.remove({order_number: req.param.orderNumber, username:uname}, function
             (err, order) {
             if (err) res.send(err);
