@@ -34,7 +34,8 @@ var OrderSchema = new Schema({
     },
     goods_special:{
         type:String,
-        enum:["explosive", "poisonous", "radioactive", "hermetic_package"]
+        enum:["explosive", "poisonous", "radioactive", "hermetic_package", "not_special"],
+        default:"not_special"
     },
     volume:{
         type:Number,

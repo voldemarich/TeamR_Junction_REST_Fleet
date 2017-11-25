@@ -8,7 +8,6 @@ var mongoose = require('mongoose'),
 
 exports.register_new_user = function (req, res) {
     var new_user = new User(req.body);
-    console.log(req.body);
     new_user.save(function (err, user) {
         if(err){
             res.send(err);

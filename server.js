@@ -7,8 +7,11 @@ var express = require("express"),
     app = express(),
     port = process.env.PORT || 3000;
 
+//** Data models registration section **//
+
 User = require('./models/users');
 Token = require('./models/tokens');
+Order = require('./models/orders');
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/fleetboard');
@@ -17,9 +20,15 @@ mongoose.connect('mongodb://localhost/fleetboard');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var routes = require('./routes/userroute.js'); //importing route
-routes(app); //register the route
+var userroutes = require('./routes/userroute.js'); //importing route
+userroutes(app); //register the route
+var orderroutes = require('./routes/orderroute.js'); //importing route
+orderroutes(app); //register the route
 
+app.param('orderNumber', function(req, res, next, orderNumber){
+    req.param.orderNumber = orderNumber;
+    return next()
+});
 
 app.listen(port);
 

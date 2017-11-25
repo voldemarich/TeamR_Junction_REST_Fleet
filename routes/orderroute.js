@@ -9,5 +9,6 @@ module.exports = function (app) {
         .post(ordercontroller.register_order);
 
     app.route('/orders/:orderNumber')
-        .get(ordercontroller.get_order);
+        .get(ordercontroller.get_order)
+        .delete(ordercontroller.delete_order);
 };
