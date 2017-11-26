@@ -22,11 +22,11 @@ exports.get_all_violations = function (req, res) {
         Violation.find(function
             (err, violations) {
             if (err) res.send(err);
-            var viol_short_response = [];
+            var viol_response = [];
             violations.forEach(function (p1, p2, p3) {
-                viol_short_response.push({order_number:p1.order_number, is_finalized:p1.is_finalized});
+                viol_response.push(p1);
             });
-            res.json(viol_short_response);
+            res.json(viol_response);
         })
     })
 };

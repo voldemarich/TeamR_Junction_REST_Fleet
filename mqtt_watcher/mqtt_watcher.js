@@ -23,7 +23,7 @@ module.exports = function () {
 
         var mqtt = require('mqtt');
 
-        var client = mqtt.connect('mqtt://130.233.84.108');
+        var client = mqtt.connect('mqtt://localhost');
 
         function processTempViolation(_order, _temperature) {
             if(_order.temperature+TEMP_RANGE > _temperature && _order.temperature-TEMP_RANGE < _temperature) return;

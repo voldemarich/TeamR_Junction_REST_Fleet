@@ -52,10 +52,10 @@ exports.register_multiple_orders = function (req, res) {
 
             var new_order = new Order(order_col);
             new_order.save(function (err, order) {
-                if (err) {
+                if (err || order === null) {
                     success = false;
                 }
-                console.log(order);
+                //console.log(order);
             });
 
         });
@@ -63,22 +63,22 @@ exports.register_multiple_orders = function (req, res) {
     });
 };
 
-exports.register_order = function (req, res) {
-    authcontroller.authorize_username(req, res, function (uname) {
-        order_col = req.body;
-        order_col.username = uname;
-
-        var new_order = new Order(order_col);
-        new_order.save(function (err, order) {
-            if (err) {
-                res.send(err);
-                return;
-            }
-            res.response_stack.push(order);
-
-        });
-    })
-};
+// exports.register_order = function (req, res) {
+//     authcontroller.authorize_username(req, res, function (uname) {
+//         order_col = req.body;
+//         order_col.username = uname;
+//
+//         var new_order = new Order(order_col);
+//         new_order.save(function (err, order) {
+//             if (err) {
+//                 res.send(err);
+//                 return;
+//             }
+//             res.response_stack.push(order);
+//
+//         });
+//     })
+// };
 
 exports.delete_order = function (req, res) {
     authcontroller.authorize_username(req, res, function (uname) {
